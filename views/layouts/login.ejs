@@ -1,0 +1,22 @@
+<h1><%= title %></h1>
+<% errors.forEach(error => { %>
+    <p><%= error %> </p>
+<% }) %> 
+<% if (msg != "") { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= msg %> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+<% } %> 
+<form action="" method="post" autocomplete="off">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text"> <br>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"> <br>
+    <button class="btn btn-primary" type="submit">Log in</button>
+</form>
+<form action="/">
+  <button class="btn btn-warning" type="submit">Home</button>
+</form>

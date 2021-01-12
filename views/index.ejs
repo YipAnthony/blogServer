@@ -1,2 +1,54 @@
 <h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<% if (successMsg != "") { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= successMsg %> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+<% } %> 
+<% if (!!user) { %>
+    <p>Hello, <%= user.first_name %> </p>
+    <form action="/users/logout" method="post">
+        <button class="btn btn-danger" type="submit">Logout</button>
+    </form>
+    <form action="/posts">
+        <button class="btn btn-primary" type="submit">Create Post</button>
+    </form>
+    <form action="/posts/saved">
+        <button class="btn btn-primary" type="submit">Unpublished Post</button>
+    </form>
+<% } else { %> 
+    <form action="/users">
+        <button class="btn btn-primary" type="submit">Sign up</button>
+    </form>
+    <form action="/login">
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+<% } %> 
+<% if (posts) { %>
+    <% posts.forEach(post => { %>
+        <% if (!post.published) return %> 
+        <div>
+            <h3>
+                <a href="<%= "posts/" + post._id %> ">
+                    <%= post.title %> 
+                </a>    
+            </h3>
+            <%- post.content %> 
+            <p><%= post.username %> </p>
+            <p><%= post.creationTime %> </p>
+            <% if (user) { %>
+                <% if (user.username === post.username) { %> 
+                    <form action="<%= "posts/edit/" + post._id %>">
+                        <button class="btn btn-warning" type="submit">Edit Post</button>
+                    </form>
+                    <form action="<%= "posts/delete/" + post._id %>">
+                        <button class="btn btn-danger" type="submit">Delete Post</button>
+                    </form>
+                <% } %> 
+            <% } %> 
+            <hr>
+        </div>
+    <% }) %> 
+<% } %> 

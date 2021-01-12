@@ -1,0 +1,33 @@
+<h1><%= title %></h1>
+<% if (errors) { %>
+    <% errors.forEach(error => { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <%= error.msg %> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    <% }) %> 
+<% } %> 
+
+<form action="" method="post" autocomplete="off">
+    <label for="firstName">First Name</label>
+    <input id="firstName" name="firstName" type="text" value="<%= fields.firstName ? fields.firstName : "" %>"> <br>
+
+    <label for="lastName">Last Name</label>
+    <input id="lastName" name="lastName" type="text" value="<%= fields.lastName ? fields.lastName : "" %>"> <br>
+
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" value="<%= fields.username ? fields.username : "" %>"> <br>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"> <br>
+
+    <label for="password2">Confirm Password</label>
+    <input id="password2" name="password2" type="password"> <br>
+
+    <button class="btn btn-primary" type="submit">Create Account</button>
+</form>
+<form action="/">
+    <button class="btn btn-warning" type="submit">Home</button>
+  </form>

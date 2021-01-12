@@ -1,0 +1,11 @@
+<form action="/">
+    <button class="btn btn-danger" type="submit">Home</button>
+</form>
+<% blogs.forEach(blog => { %>
+    <h3><%= blog.title %> </h3>
+    <p><%- blog.content %> </p>
+    <form action="<%= "/posts/edit/" + blog._id %>">
+        <button class="btn btn-warning" type="submit">Edit Post</button>
+    </form>
+    <hr>
+<% }) %> 

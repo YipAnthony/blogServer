@@ -1,0 +1,25 @@
+<form action="/">
+    <button class="btn btn-danger" type="submit">Home</button>
+</form>
+<h3><%= blog.title %> </h3>
+<p><%= blog.content%> </p>
+<hr>
+<h5>Comments:</h5>
+<% if (!user) { %>
+    <form action="<%= "/login"%>">
+        <button class="btn btn-primary" type="submit">Sign in to comment</button>
+    </form>
+
+<% } else {%> 
+    <form action="<%= "/posts/" + blog._id + "/comments" %> " method="post">
+        <textarea id="content" name="content"></textarea>
+        <button class="btn btn-primary" type="submit">Add comment</button>
+    </form>
+<% } %>
+<hr>
+<% blog.comments.forEach(comment => { %>
+    <p><strong><%= comment.username %> </strong></p>
+    <p><%= comment.creationTime %> </p>
+    <p><%- comment.content %> </p>
+    <hr>
+<% }) %> 
