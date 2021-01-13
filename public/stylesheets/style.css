@@ -72,3 +72,17 @@ body {
   display: flex;
   margin-left: auto;
 }
+
+#footer {
+  display: flex;
+  flex-direction: row;
+}
+
+#footer img {
+  width: 20px;
+}
+
+.logos {
+  margin-left: auto;
+
+}
