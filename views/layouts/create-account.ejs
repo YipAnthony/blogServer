@@ -1,4 +1,6 @@
-<h1><%= title %></h1>
+<% include ../partials/topBar %>
+
+
 <% if (errors) { %>
     <% errors.forEach(error => { %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -11,23 +13,31 @@
 <% } %> 
 
 <form action="" method="post" autocomplete="off">
-    <label for="firstName">First Name</label>
-    <input id="firstName" name="firstName" type="text" value="<%= fields.firstName ? fields.firstName : "" %>"> <br>
-
-    <label for="lastName">Last Name</label>
-    <input id="lastName" name="lastName" type="text" value="<%= fields.lastName ? fields.lastName : "" %>"> <br>
-
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" value="<%= fields.username ? fields.username : "" %>"> <br>
-
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password"> <br>
-
-    <label for="password2">Confirm Password</label>
-    <input id="password2" name="password2" type="password"> <br>
+  <fieldset>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input placeholder="Enter first name" class="form-control" id="firstName" name="firstName" type="text" value="<%= fields.firstName ? fields.firstName : "" %>"> <br>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input placeholder="Enter last name" id="lastName" class="form-control" name="lastName" type="text" value="<%= fields.lastName ? fields.lastName : "" %>"> <br>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input placeholder="Enter username" id="username"  class="form-control" name="username" type="text" value="<%= fields.username ? fields.username : "" %>"> <br>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <small id="passwordHelp" class="form-text text-muted">Must be at least 8 characters</small>
+      <input placeholder="Enter password" id="password"  class="form-control" name="password" type="password"> <br>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="password2">Confirm Password</label>
+      <input placeholder="Re-enter password" id="password2"  class="form-control" name="password2" type="password"> <br>
+    </div>
 
     <button class="btn btn-primary" type="submit">Create Account</button>
+
+  </fieldset>
 </form>
-<form action="/">
-    <button class="btn btn-warning" type="submit">Home</button>
-  </form>

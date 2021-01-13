@@ -1,10 +1,26 @@
-<form action="/">
-    <button class="btn btn-danger" type="submit">Home</button>
-</form>
-<h3><%= blog.title %> </h3>
-<p><%= blog.content%> </p>
+<% include ../partials/topBar %>
+
+
+<h3 class="postTopBar">
+    <%= blog.title%> 
+    <% if (user) { %>
+        <% if (user.username === blog.username) { %> 
+            <div class="modifyPost">
+                <form action="<%= "edit/" + blog._id %>">
+                    <button class="btn btn-sm btn-warning" type="submit">Edit</button>
+                </form>
+                <form action="<%= "delete/" + blog._id %>">
+                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </form>
+
+            </div>
+        <% } %> 
+    <% } %>  
+</h3>
+<p>Published by: <%= blog.username %> on <%= blog.formattedCreationTime %> </p>
+<p><%- blog.content%> </p>
 <hr>
-<h5>Comments:</h5>
+<h5>Comments: (<%= blog.comments.length %>)</h5>
 <% if (!user) { %>
     <form action="<%= "/login"%>">
         <button class="btn btn-primary" type="submit">Sign in to comment</button>
@@ -19,7 +35,13 @@
 <hr>
 <% blog.comments.forEach(comment => { %>
     <p><strong><%= comment.username %> </strong></p>
-    <p><%= comment.creationTime %> </p>
+    <p><%= comment.formattedCreationTime || comment.creationTime%> </p>
     <p><%- comment.content %> </p>
+    <% if (user) { %>
+        <form action="<%= "/posts/" + blog._id + "/comments/delete/" + comment._id%>" method="post">
+            <button class="btn btn-primary" type="submit">Delete comment</button>
+        </form>
+    
+    <% } %>
     <hr>
 <% }) %> 

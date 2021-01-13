@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 module.exports = {
     passportAuthentication: new LocalStrategy( (username, password, done) => {
-
+        username = username.toLowerCase()
         User.findOne({username}, (err, user) => {
             if (err) {
                 return done(err)

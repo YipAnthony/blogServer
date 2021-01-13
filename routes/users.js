@@ -3,10 +3,10 @@ var router = express.Router();
 const User = require('../models/users')
 const bcrypt = require('bcryptjs')
 const { body,validationResult } = require('express-validator');
-
+const checkLoggedIn = require('../functions/checkAuthorization')
 
 // POST logout
-router.post('/logout', (req, res, next) => {
+router.post('/logout', checkLoggedIn, (req, res, next) => {
   req.logout()
   res.redirect('/')
 })
@@ -23,12 +23,14 @@ router.post('/', [
   body('username', 'Username is required').trim().isLength({min: 1}).escape(),
   body('firstName', 'First name is required').trim().isLength({min: 1}).escape(),
   body('lastName', 'Last name is required').trim().isLength({min: 1}).escape(),
-  body('password', 'Password is required').trim().isLength({min: 1}).escape(),
+  body('password', 'Password does not meet criteria').trim().isLength({min: 8}).escape(),
   async(req, res, next) => {
     // Extract validation errors
     const errors = validationResult(req).array();
 
-    const fieldsUnfilled = !req.body.firstName || !req.body.lastName|| !req.body.username|| !req.body.password|| !req.body.password2
+    const passwordMeetsCriteria = req.body.password.length > 8
+
+    const fieldsUnfilled = !passwordMeetsCriteria || !req.body.firstName || !req.body.lastName|| !req.body.username|| !req.body.password|| !req.body.password2
     if (fieldsUnfilled) {
       // errors.push("Must fill out all fields")
       res.render('./layouts/create-account', 
@@ -38,7 +40,7 @@ router.post('/', [
           fields: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            username: req.body.username
+            username: req.body.username.toLowerCase()
           }
         })
     } else {
@@ -60,14 +62,13 @@ router.post('/', [
           const newUser = new User({
             first_name: req.body.firstName,
             last_name: req.body.lastName,
-            username: req.body.username,
+            username: req.body.username.toLowerCase(),
             password: hashedPassword
           })
       
           newUser.save( (err, user) => {
             if (err) return next(err)
-            console.log(`Created ${user.username}`)
-            req.flash('successMsg', "Account successfully created. Sign in to start blogging!")
+            req.flash('successMsg', "Account successfully created. Log in to start blogging!")
             res.redirect('/')
           })
         })
@@ -81,7 +82,7 @@ router.post('/', [
           fields: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            username: req.body.username
+            username: req.body.username.toLowerCase()
           }
         })
       }

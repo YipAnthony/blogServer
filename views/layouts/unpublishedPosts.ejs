@@ -1,6 +1,5 @@
-<form action="/">
-    <button class="btn btn-danger" type="submit">Home</button>
-</form>
+<% include ../partials/topBar %>
+<hr>
 <% blogs.forEach(blog => { %>
     <h3><%= blog.title %> </h3>
     <p><%- blog.content %> </p>

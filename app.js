@@ -37,6 +37,7 @@ var mongoDB = process.env.DB_URL;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.set('useFindAndModify', false);
 
 // view engine setup
 app.use(expressLayouts)

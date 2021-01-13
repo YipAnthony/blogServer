@@ -1,8 +1,74 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 900px;
+  margin: auto;
 }
 
-a {
-  color: #00B7FF;
+#navbar {
+  margin-bottom: 20px;
+}
+
+#navbar, #loginLogout {
+  display: flex;
+  flex-direction: row;
+}
+#navbar h1, #navbar a {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+#loginLogout {
+  margin-left: auto;
+}
+
+#loginLogout form {
+  margin-right: 5px;
+}
+
+#loginLogout p {
+  align-self: center;
+  margin: auto;
+  margin-right: 10px;
+}
+
+#createPosts {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+#createPosts form {
+  margin-right: 10px;
+}
+
+.publisherInfo {
+  margin-bottom: 5px;
+}
+.postContent {
+  margin-top: 10px;
+}
+.commentsIcon {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.commentsIcon img {
+  margin-left: 5px;
+}
+
+.filterWhite {
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(3deg) brightness(103%) contrast(106%);
+}
+
+.postTopBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.postTopBar .modifyPost {
+  display: flex;
+  margin-left: auto;
 }

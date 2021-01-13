@@ -6,9 +6,9 @@ const BlogPost = require('../models/blogPost')
 /* GET home page. */
 router.get('/', async (req, res, next) => {
 
-  const posts = await BlogPost.find({})
+  const posts = await BlogPost.find({}).sort({creationTime: "desc"})
   
-  res.render('index', { title: "Yip's Blog", posts });
+  res.render('index', { title: "Generic Blog", posts });
 });
 
 module.exports = router;
